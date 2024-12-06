@@ -1,19 +1,12 @@
 import type { Metadata } from "next";
-//import localFont from "next/font/local";
+import { Montserrat } from "next/font/google";
 import "./globals.css";
 
-/*
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-montserrat",
 });
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
-*/
 
 export const metadata: Metadata = {
   title: "Quizify",
@@ -27,10 +20,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-      //className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+      <body className={`${montserrat.className} antialiased`}>
+        <div className="min-h-screen w-full flex flex-col">{children}</div>
       </body>
     </html>
   );
