@@ -5,6 +5,7 @@ import "./globals.css";
 const montserrat = Montserrat({
   subsets: ["latin"],
   display: "swap",
+  weight: ["900", "700", "500", "400"],
   variable: "--font-montserrat",
 });
 
@@ -20,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${montserrat.className} antialiased`}>
+      <body className={`${montserrat.className} antialiased bg-gray-100`}>
         <div className="min-h-screen w-full flex flex-col">{children}</div>
       </body>
     </html>
