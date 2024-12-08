@@ -1,41 +1,31 @@
 "use client";
 
 import React from "react";
+import { ColorsType, SizeType } from "../lib/definitions";
 
-interface BtnProps {
+interface BtnProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
-  size?: "xs" | "sm" | "md" | "lg";
-  color?:
-    | "neutral"
-    | "primary"
-    | "secondary"
-    | "accent"
-    | "ghost"
-    | "info"
-    | "error"
-    | "warning"
-    | "success"
-    | "link";
-  disabled?: boolean;
+  size?: SizeType;
+  color?: ColorsType;
   fullWidth?: boolean;
-  type?: "button" | "reset" | "submit";
   onClick?: () => void;
   children: React.ReactNode;
 }
 
 const Button: React.FC<BtnProps> = ({
   className,
-  disabled = false,
   fullWidth = false,
   color = "primary",
   onClick,
-  type = "button",
   children,
+  ...props
 }) => {
+  const fullWidthClass = fullWidth ? "btn-block" : "";
+  const classNameProp = className ?? "";
   return (
     <button
-      type={type}
-      className={`${className} btn-${color}`}
+      {...props}
+      className={`btn btn-${color} ${classNameProp} ${fullWidthClass}`}
       onClick={onClick}
     >
       {children}

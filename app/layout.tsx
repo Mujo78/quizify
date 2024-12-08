@@ -21,8 +21,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${montserrat.className} antialiased bg-gray-100`}>
-        <div className="min-h-screen w-full flex flex-col">{children}</div>
+      <body className={`${montserrat.className} antialiased`}>
+        <main className="min-h-screen w-full flex flex-col">{children}</main>
       </body>
     </html>
   );
