@@ -2,6 +2,7 @@
 
 import React from "react";
 import { ColorsType, SizeType } from "../lib/definitions";
+import { getDaisyColor } from "../utils/helpers";
 
 interface BtnProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
@@ -22,12 +23,14 @@ const Button: React.FC<BtnProps> = ({
 }) => {
   const fullWidthClass = fullWidth ? "btn-block" : "";
   const classNameProp = className ?? "";
+
+  const fullClassName = `btn ${getDaisyColor(
+    color,
+    "btn"
+  )} ${classNameProp} ${fullWidthClass}`.trim();
+
   return (
-    <button
-      {...props}
-      className={`btn btn-${color} ${classNameProp} ${fullWidthClass}`}
-      onClick={onClick}
-    >
+    <button className={fullClassName} onClick={onClick} {...props}>
       {children}
     </button>
   );

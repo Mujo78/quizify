@@ -2,6 +2,7 @@
 
 import React from "react";
 import { ColorsType, SizeType } from "../lib/definitions";
+import { getDaisyColor, sizeVariants } from "../utils/helpers";
 
 interface Option {
   value: string;
@@ -10,7 +11,7 @@ interface Option {
 
 interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
   label: string;
-  placeholder: string;
+  placeholder?: string;
   options: Option[];
   value: string;
   onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
@@ -26,10 +27,15 @@ const Select: React.FC<SelectProps> = ({
   options,
   label,
   bordered,
-  selectSize = "lg",
-  color = "error",
+  selectSize = "md",
+  color = "primary",
   ...props
 }) => {
+  const sizeProp = sizeVariants["select"][selectSize] ?? "";
+  const fullClass = `select bg-white text-slate-800 ${getDaisyColor(
+    color,
+    "select"
+  )} ${sizeProp}`;
   return (
     <>
       <label htmlFor={`select-${label}`}>{label}</label>
@@ -38,11 +44,13 @@ const Select: React.FC<SelectProps> = ({
         {...props}
         onChange={onChange}
         value={value}
-        className={`select select-${selectSize} select-${color}`}
+        className={fullClass}
       >
-        <option value="" className="select-disabled">
-          {placeholder}
-        </option>
+        {placeholder && (
+          <option value="" className="select-disabled bg-inherit">
+            {placeholder}
+          </option>
+        )}
         {options.map((option) => (
           <option key={option.value} value={option.value}>
             {option.name}
