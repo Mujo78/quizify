@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import { ColorsType, SizeType } from "../lib/definitions";
-import { getDaisyColor, sizeVariants } from "../utils/helpers";
+import { ColorsType, SizeType } from "../../lib/definitions";
+import { getDaisyColor, sizeVariants } from "../../utils/helpers";
 
 interface Option {
   value: string;
@@ -37,8 +37,10 @@ const Select: React.FC<SelectProps> = ({
     "select"
   )} ${sizeProp}`;
   return (
-    <>
-      <label htmlFor={`select-${label}`}>{label}</label>
+    <label className="form-control w-full max-w-full">
+      <div className="label">
+        <span className="label-text">{label}</span>
+      </div>
       <select
         id={`select-${label}`}
         {...props}
@@ -57,7 +59,7 @@ const Select: React.FC<SelectProps> = ({
           </option>
         ))}
       </select>
-    </>
+    </label>
   );
 };
 

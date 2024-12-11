@@ -4,7 +4,7 @@ import QuestionConfig from "./components/Questions/QuestionConfig";
 export default function Home() {
   return (
     <div className="flex flex-grow w-full p-1 justify-center items-center bg-blue-500">
-      <div className="h-96 bg-white w-full md:w-2/5 flex flex-col rounded-lg p-4 gap-4">
+      <div className="h-auto bg-white w-full md:w-2/4 flex flex-col rounded-lg p-4 gap-4">
         <h1 className="text-3xl text-center text-slate-800 font-medium">
           Welcome to the Quzify
         </h1>

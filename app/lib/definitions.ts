@@ -10,7 +10,7 @@ export type ColorsType =
   | "success"
   | "link";
 
-export type ComponentType = "btn" | "select";
+export type ComponentType = "btn" | "select" | "range";
 export type SizeType = "xs" | "sm" | "md" | "lg";
 
 export type DifficultyType = "easy" | "medium" | "hard";

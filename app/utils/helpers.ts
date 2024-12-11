@@ -2,7 +2,7 @@ import { ColorsType, ComponentType, SizeType } from "../lib/definitions";
 
 export const colorVariants: Record<
   ComponentType,
-  Record<ColorsType, string>
+  Partial<Record<ColorsType, string>>
 > = {
   btn: {
     neutral: "btn-neutral",
@@ -28,6 +28,15 @@ export const colorVariants: Record<
     success: "select-success",
     link: "select-link",
   },
+  range: {
+    primary: "range-primary",
+    secondary: "range-secondary",
+    accent: "range-accent",
+    info: "range-info",
+    error: "range-error",
+    warning: "range-warning",
+    success: "range-success",
+  },
 };
 
 export const sizeVariants: Record<ComponentType, Record<SizeType, string>> = {
@@ -43,8 +52,14 @@ export const sizeVariants: Record<ComponentType, Record<SizeType, string>> = {
     md: "select-md",
     lg: "select-lg",
   },
+  range: {
+    xs: "range-xs",
+    sm: "range-sm",
+    md: "range-md",
+    lg: "range-lg",
+  },
 };
 
-export function getDaisyColor(color: ColorsType, component: "btn" | "select") {
+export function getDaisyColor(color: ColorsType, component: ComponentType) {
   return colorVariants[component][color];
 }
