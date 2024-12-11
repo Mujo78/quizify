@@ -1,3 +1,3 @@
 # Quizify
 
-Next.js, TypeScript, TailwindCSS, DaisyUI
+Next.js, Zustand, TypeScript, TailwindCSS, DaisyUI
