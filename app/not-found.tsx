@@ -3,7 +3,7 @@ import React from "react";
 
 const NotFound = () => {
   return (
-    <div className="flex items-center justify-center flex-grow text-slate-800">
+    <div className="flex items-center justify-center flex-grow text-slate-800 bg-gray-200">
       <main className="text-center flex flex-col items-center gap-5 max-w-xl 3xl:max-w-2xl">
         <h1 className="text-8xl 3xl:text-9xl font-bold">Oops!</h1>
         <h3 className="text-4xl 3xl:text-5xl">404 - PAGE NOT FOUND</h3>

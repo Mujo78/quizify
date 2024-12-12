@@ -1,5 +1,5 @@
-import { ColorsType, SizeType } from "@/app/lib/definitions";
-import { getDaisyColor, sizeVariants } from "@/app/utils/helpers";
+import { ColorsType, SizeType } from "@/lib/definitions";
+import { getDaisyColor, sizeVariants } from "@/utils/helpers";
 import React from "react";
 
 interface RangeProps extends React.InputHTMLAttributes<HTMLInputElement> {

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import QuestionConfig from "./components/Questions/QuestionConfig";
+import QuestionConfig from "./components/Question/QuestionConfig";
 
 export default function Home() {
   return (

@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
+import { getDaisyColor, sizeVariants } from "@/utils/helpers";
 import { ColorsType, SizeType } from "../../lib/definitions";
-import { getDaisyColor, sizeVariants } from "../../utils/helpers";
 
 interface Option {
   value: string;

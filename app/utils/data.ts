@@ -1,6 +1,6 @@
-import { DifficultyType } from "../lib/definitions";
+import { CategoryType, DifficultyType, Option } from "@/lib/definitions";
 
-export const difficultyOptions: { name: string; value: DifficultyType }[] = [
+export const difficultyOptions: Option<DifficultyType>[] = [
   {
     name: "Easy",
     value: "easy",
@@ -13,4 +13,17 @@ export const difficultyOptions: { name: string; value: DifficultyType }[] = [
     name: "Hard",
     value: "hard",
   },
+];
+
+export const categoryOptions: CategoryType[] = [
+  "arts_and_literature",
+  "film_and_tv",
+  "food_and_drink",
+  "general_knowledge",
+  "geography",
+  "history",
+  "music",
+  "science",
+  "society_and_culture",
+  "sport_and_leisure",
 ];

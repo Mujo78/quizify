@@ -1,25 +1,24 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import Button from "../UI/Button";
 import Select from "../UI/Select";
-import { DifficultyType } from "@/app/lib/definitions";
-import { difficultyOptions } from "@/app/utils/data";
+import { DifficultyType, CategoryType, Option } from "@/lib/definitions";
+import { categoryOptions, difficultyOptions } from "@/utils/data";
 import Range from "../UI/Range";
-
-const options = [
-  { value: "1", name: "Something" },
-  { value: "2", name: "Something Else" },
-];
+import { useRouter } from "next/navigation";
 
 const QuestionConfig = () => {
-  const [selectValue, setSelectValue] = useState<string>("");
+  const router = useRouter();
+  const [selectValue, setSelectValue] = useState<CategoryType>(
+    "arts_and_literature"
+  );
   const [selectDifficulty, setDifficulty] = useState<DifficultyType>("easy");
   const [selectRange, setSelectRange] = useState<number>(1);
 
   const onHandleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const { value } = event.target;
-    setSelectValue(value);
+    setSelectValue(value as CategoryType);
   };
 
   const onHandleChangeRange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,14 +33,41 @@ const QuestionConfig = () => {
     setDifficulty(value as DifficultyType);
   };
 
+  const onHandleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (!categoryOptions.includes(selectValue)) {
+      console.log("Please choose valid category option.");
+    }
+
+    if (!difficultyOptions.some((value) => value.value === selectDifficulty)) {
+      console.log("Please choose valid level option.");
+    }
+
+    if (selectRange < 0 || selectRange > 10) {
+      console.log("Please choose valid range.");
+    }
+
+    router.push("/questions");
+  };
+
+  const formattedCategoryOptions = useMemo<Option<CategoryType>[]>(() => {
+    return categoryOptions.map((value) => ({
+      value,
+      name: value
+        .split("_")
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(" "),
+    }));
+  }, [categoryOptions]);
+
   return (
-    <form className="w-full flex flex-col gap-4">
+    <form onSubmit={onHandleSubmit} className="w-full flex flex-col gap-4">
       <Select
-        options={options}
+        options={formattedCategoryOptions}
         onChange={onHandleChange}
         value={selectValue}
         color="warning"
-        placeholder="Please choose one category"
         label="Choose Category"
       />
 
@@ -63,11 +89,7 @@ const QuestionConfig = () => {
         <span>{selectRange}</span>
       </div>
 
-      <Button
-        color="warning"
-        type="submit"
-        onClick={() => console.log("object")}
-      >
+      <Button color="warning" type="submit">
         Start Quiz
       </Button>
     </form>

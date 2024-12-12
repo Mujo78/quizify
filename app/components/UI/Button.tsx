@@ -2,7 +2,7 @@
 
 import React from "react";
 import { ColorsType, SizeType } from "../../lib/definitions";
-import { getDaisyColor } from "../../utils/helpers";
+import { getDaisyColor } from "@/utils/helpers";
 
 interface BtnProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;

@@ -1,4 +1,4 @@
-import { ColorsType, ComponentType, SizeType } from "../lib/definitions";
+import { ColorsType, ComponentType, SizeType } from "@/lib/definitions";
 
 export const colorVariants: Record<
   ComponentType,
