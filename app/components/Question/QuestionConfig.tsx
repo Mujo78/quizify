@@ -5,8 +5,10 @@ import Button from "../UI/Button";
 import Select from "../UI/Select";
 import { DifficultyType, CategoryType, Option } from "@/lib/definitions";
 import { categoryOptions, difficultyOptions } from "@/utils/data";
-import Range from "../UI/Range";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
+import Label from "../UI/Label";
+import Input from "../UI/Input";
 
 const QuestionConfig = () => {
   const router = useRouter();
@@ -37,15 +39,18 @@ const QuestionConfig = () => {
     event.preventDefault();
 
     if (!categoryOptions.includes(selectValue)) {
-      console.log("Please choose valid category option.");
+      toast.error("Please choose valid category option.");
+      return;
     }
 
     if (!difficultyOptions.some((value) => value.value === selectDifficulty)) {
-      console.log("Please choose valid level option.");
+      toast.error("Please choose valid level option.");
+      return;
     }
 
-    if (selectRange < 0 || selectRange > 10) {
-      console.log("Please choose valid range.");
+    if (selectRange < 1 || selectRange > 10) {
+      toast.error("Please choose valid range.");
+      return;
     }
 
     router.push("/questions");
@@ -63,30 +68,41 @@ const QuestionConfig = () => {
 
   return (
     <form onSubmit={onHandleSubmit} className="w-full flex flex-col gap-4">
-      <Select
-        options={formattedCategoryOptions}
-        onChange={onHandleChange}
-        value={selectValue}
-        color="warning"
-        label="Choose Category"
-      />
+      <div className="form-control max-w-full">
+        <Label htmlFor="category" text="Category" />
+        <Select
+          id="category"
+          options={formattedCategoryOptions}
+          onChange={onHandleChange}
+          value={selectValue}
+          color="warning"
+        />
+      </div>
 
-      <Select
-        options={difficultyOptions}
-        onChange={onHandleDifficultyChange}
-        value={selectDifficulty}
-        color="warning"
-        label="Difficulty"
-      />
+      <div className="form-control max-w-full">
+        <Label htmlFor="difficulty" text="Difficulty" />
+        <Select
+          options={difficultyOptions}
+          onChange={onHandleDifficultyChange}
+          value={selectDifficulty}
+          color="warning"
+          id="difficulty"
+        />
+      </div>
 
-      <div className="text-center w-auto">
-        <Range
-          rangeColor="ghost"
+      <div className="text-center form-control max-w-full">
+        <Label htmlFor="numberOfQuestions" text="Choose number of questions" />
+        <Input
+          id="numberOfQuestions"
+          inputColor="info"
+          componentType="range"
+          min={0}
+          max={10}
           value={selectRange}
           onChange={onHandleChangeRange}
-          label="Number of questions"
         />
-        <span>{selectRange}</span>
+
+        <span className="text-slate-800">{selectRange}</span>
       </div>
 
       <Button color="warning" type="submit">

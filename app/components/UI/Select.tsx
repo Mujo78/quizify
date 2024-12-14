@@ -10,7 +10,6 @@ interface Option {
 }
 
 interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
-  label: string;
   placeholder?: string;
   options: Option[];
   value: string;
@@ -25,7 +24,6 @@ const Select: React.FC<SelectProps> = ({
   onChange,
   value,
   options,
-  label,
   bordered,
   selectSize = "md",
   color = "primary",
@@ -37,29 +35,18 @@ const Select: React.FC<SelectProps> = ({
     "select"
   )} ${sizeProp}`;
   return (
-    <label className="form-control w-full max-w-full">
-      <div className="label">
-        <span className="label-text">{label}</span>
-      </div>
-      <select
-        id={`select-${label}`}
-        {...props}
-        onChange={onChange}
-        value={value}
-        className={fullClass}
-      >
-        {placeholder && (
-          <option value="" className="select-disabled bg-inherit">
-            {placeholder}
-          </option>
-        )}
-        {options.map((option) => (
-          <option key={option.value} value={option.value}>
-            {option.name}
-          </option>
-        ))}
-      </select>
-    </label>
+    <select {...props} onChange={onChange} value={value} className={fullClass}>
+      {placeholder && (
+        <option value="" className="select-disabled bg-inherit">
+          {placeholder}
+        </option>
+      )}
+      {options.map((option) => (
+        <option key={option.value} value={option.value}>
+          {option.name}
+        </option>
+      ))}
+    </select>
   );
 };
 

@@ -37,6 +37,16 @@ export const colorVariants: Record<
     warning: "range-warning",
     success: "range-success",
   },
+  text: {
+    ghost: "input-ghost",
+    primary: "input-primary",
+    secondary: "input-secondary",
+    accent: "input-accient",
+    info: "input-info",
+    success: "input-success",
+    warning: "input-warning",
+    error: "input-error",
+  },
 };
 
 export const sizeVariants: Record<ComponentType, Record<SizeType, string>> = {
@@ -57,6 +67,12 @@ export const sizeVariants: Record<ComponentType, Record<SizeType, string>> = {
     sm: "range-sm",
     md: "range-md",
     lg: "range-lg",
+  },
+  text: {
+    xs: "input-xs",
+    sm: "input-sm",
+    md: "input-md",
+    lg: "input-lg",
   },
 };
 
