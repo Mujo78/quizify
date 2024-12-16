@@ -37,6 +37,15 @@ export const colorVariants: Record<
     warning: "range-warning",
     success: "range-success",
   },
+  radio: {
+    primary: "radio-primary",
+    secondary: "radio-secondary",
+    accent: "radio-accient",
+    info: "radio-info",
+    success: "radio-success",
+    warning: "radio-warning",
+    error: "radio-error",
+  },
   text: {
     ghost: "input-ghost",
     primary: "input-primary",
@@ -49,7 +58,10 @@ export const colorVariants: Record<
   },
 };
 
-export const sizeVariants: Record<ComponentType, Record<SizeType, string>> = {
+export const sizeVariants: Record<
+  ComponentType,
+  Partial<Record<SizeType, string>>
+> = {
   btn: {
     xs: "btn-xs",
     sm: "btn-sm",
@@ -67,6 +79,9 @@ export const sizeVariants: Record<ComponentType, Record<SizeType, string>> = {
     sm: "range-sm",
     md: "range-md",
     lg: "range-lg",
+  },
+  radio: {
+    md: "radio-md",
   },
   text: {
     xs: "input-xs",

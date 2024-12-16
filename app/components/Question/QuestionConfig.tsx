@@ -75,7 +75,7 @@ const QuestionConfig = () => {
           options={formattedCategoryOptions}
           onChange={onHandleChange}
           value={selectValue}
-          color="warning"
+          color="neutral"
         />
       </div>
 
@@ -85,7 +85,7 @@ const QuestionConfig = () => {
           options={difficultyOptions}
           onChange={onHandleDifficultyChange}
           value={selectDifficulty}
-          color="warning"
+          color="neutral"
           id="difficulty"
         />
       </div>
@@ -105,7 +105,7 @@ const QuestionConfig = () => {
         <span className="text-slate-800">{selectRange}</span>
       </div>
 
-      <Button color="warning" type="submit">
+      <Button color="info" type="submit">
         Start Quiz
       </Button>
     </form>
