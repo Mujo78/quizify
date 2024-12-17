@@ -53,7 +53,9 @@ const QuestionConfig = () => {
       return;
     }
 
-    router.push("/questions");
+    router.push(
+      `/questions?limit=${selectRange}&difficulty=${selectDifficulty}&category=${selectValue}`
+    );
   };
 
   const formattedCategoryOptions = useMemo<Option<CategoryType>[]>(() => {
