@@ -1,23 +1,32 @@
 "use client";
 
-import React from "react";
+import React, { useMemo } from "react";
 import AnswerPick from "./AnswerPick";
 import Button from "../UI/Button";
 import { useRouter } from "next/navigation";
+import { QuestionType } from "@/lib/definitions";
 
-const Question = () => {
+interface Props {
+  questionData: QuestionType;
+}
+
+const Question: React.FC<Props> = ({ questionData }) => {
   const router = useRouter();
   const handleNavigateBack = () => {
     router.push("/");
   };
 
-  return (
-    <>
-      <h1 className="text-slate-800 text-2xl text-center">
-        What is the largest Balkan country?
-      </h1>
+  const { question, incorrectAnswers, correctAnswer } = questionData;
 
-      <AnswerPick />
+  const answers = useMemo(() => {
+    return [...incorrectAnswers, correctAnswer];
+  }, [incorrectAnswers, correctAnswer]);
+
+  return (
+    <div className="flex flex-col gap-3">
+      <h1 className="text-slate-800 text-2xl text-center">{question}</h1>
+
+      <AnswerPick answersData={answers} />
 
       <div className="flex justify-between">
         <Button onClick={handleNavigateBack} color="secondary">
@@ -25,7 +34,7 @@ const Question = () => {
         </Button>
         <Button color="info">Next</Button>
       </div>
-    </>
+    </div>
   );
 };
 
