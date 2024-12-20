@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import Label from "../UI/Label";
 import Input from "../UI/Input";
+import { formatCategory } from "@/utils/helpers";
 
 const QuestionConfig = () => {
   const router = useRouter();
@@ -61,10 +62,7 @@ const QuestionConfig = () => {
   const formattedCategoryOptions = useMemo<Option<CategoryType>[]>(() => {
     return categoryOptions.map((value) => ({
       value,
-      name: value
-        .split("_")
-        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-        .join(" "),
+      name: formatCategory(value),
     }));
   }, [categoryOptions]);
 

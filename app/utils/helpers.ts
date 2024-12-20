@@ -94,3 +94,10 @@ export const sizeVariants: Record<
 export function getDaisyColor(color: ColorsType, component: ComponentType) {
   return colorVariants[component][color];
 }
+
+export function formatCategory(category: string) {
+  return category
+    .split("_")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+}
