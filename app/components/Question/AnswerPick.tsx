@@ -28,7 +28,9 @@ const AnswerPick: React.FC<Props> = ({ answersData, correctAnswer }) => {
             color={
               selected === value ? (correct ? "success" : "error") : "ghost"
             }
-            className="border border-gray-200 text-slate-600"
+            className={`border border-gray-200 ${
+              selected === value ? "text-white" : "text-slate-600"
+            }`}
             onClick={() => handleCheckAnswer(value)}
           >
             {value}

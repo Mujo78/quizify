@@ -5,7 +5,8 @@ import AnswerPick from "./AnswerPick";
 import Button from "../UI/Button";
 import { useRouter } from "next/navigation";
 import { QuestionType } from "@/lib/definitions";
-import LoadingDots from "../UI/LoadingDots";
+import useModalStore from "@/hooks/useModalStore";
+import useScoreStore from "@/hooks/useScoreStore";
 
 interface Props {
   questionData: QuestionType;
@@ -13,6 +14,8 @@ interface Props {
 
 const Question: React.FC<Props> = ({ questionData }) => {
   const [answers, setAnswers] = useState<string[]>([]);
+  const { onOpen } = useModalStore();
+  const { score } = useScoreStore();
 
   const router = useRouter();
   const handleNavigateBack = () => {
@@ -34,12 +37,16 @@ const Question: React.FC<Props> = ({ questionData }) => {
     setAnswers(randomAnswers);
   }, []);
 
+  const handleShowModal = () => {
+    onOpen("quit", { limit: 2, score });
+  };
+
   return (
     <div className="flex flex-col gap-4">
       <h1 className="text-slate-800 text-2xl text-center">{question}</h1>
       <AnswerPick answersData={answers} correctAnswer={correctAnswer} />
       <div className="flex justify-between">
-        <Button onClick={handleNavigateBack} color="secondary">
+        <Button onClick={handleShowModal} color="secondary">
           Exit
         </Button>
         <Button color="info">Next</Button>
