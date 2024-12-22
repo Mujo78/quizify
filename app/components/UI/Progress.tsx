@@ -8,7 +8,7 @@ const Progress = ({ progressValue }: { progressValue: string | number }) => {
       style={style}
       role="progressbar"
     >
-      {progressValue}
+      {parseInt(progressValue as string).toFixed(0)}%
     </div>
   );
 };

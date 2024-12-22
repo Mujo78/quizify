@@ -33,14 +33,14 @@ export type Option<T> = {
 };
 
 export interface QuestionType {
-  category: string;
+  category: CategoryType;
   id: string;
   correctAnswer: string;
   incorrectAnswers: string[];
   question: string;
   tags: string[];
   type: string;
-  difficulty: string;
+  difficulty: DifficultyType;
   regions: string[];
   isNiche: boolean;
 }

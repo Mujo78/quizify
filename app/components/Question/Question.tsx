@@ -3,24 +3,24 @@
 import React, { useEffect, useMemo, useState } from "react";
 import AnswerPick from "./AnswerPick";
 import Button from "../UI/Button";
-import { useRouter } from "next/navigation";
 import { QuestionType } from "@/lib/definitions";
 import useModalStore from "@/hooks/useModalStore";
 import useScoreStore from "@/hooks/useScoreStore";
 
 interface Props {
   questionData: QuestionType;
+  onNextQuestion: () => void;
+  lastQuestion: boolean;
 }
 
-const Question: React.FC<Props> = ({ questionData }) => {
+const Question: React.FC<Props> = ({
+  questionData,
+  onNextQuestion,
+  lastQuestion,
+}) => {
   const [answers, setAnswers] = useState<string[]>([]);
   const { onOpen } = useModalStore();
   const { score } = useScoreStore();
-
-  const router = useRouter();
-  const handleNavigateBack = () => {
-    router.push("/");
-  };
 
   const { question, incorrectAnswers, correctAnswer } = questionData;
 
@@ -37,7 +37,7 @@ const Question: React.FC<Props> = ({ questionData }) => {
     setAnswers(randomAnswers);
   }, []);
 
-  const handleShowModal = () => {
+  const handleShowExitModal = () => {
     onOpen("quit", { limit: 2, score });
   };
 
@@ -46,10 +46,16 @@ const Question: React.FC<Props> = ({ questionData }) => {
       <h1 className="text-slate-800 text-2xl text-center">{question}</h1>
       <AnswerPick answersData={answers} correctAnswer={correctAnswer} />
       <div className="flex justify-between">
-        <Button onClick={handleShowModal} color="secondary">
+        <Button onClick={handleShowExitModal} color="secondary">
           Exit
         </Button>
-        <Button color="info">Next</Button>
+        <Button
+          color="info"
+          onClick={onNextQuestion}
+          className="!text-slate-900"
+        >
+          {lastQuestion ? "Finish" : "Next"}
+        </Button>
       </div>
     </div>
   );

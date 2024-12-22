@@ -101,3 +101,7 @@ export function formatCategory(category: string) {
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
 }
+
+export function formatDifficulty(difficulty: string) {
+  return difficulty.charAt(0).toUpperCase() + difficulty.slice(1);
+}
