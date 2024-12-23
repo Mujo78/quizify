@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import QuestionScoreLimit from "./QuestionScoreLimit";
 import Divider from "../UI/Divider";
 import Question from "./Question";
@@ -24,9 +24,6 @@ const QuestionMain: React.FC<QuestionsProps> = ({
   const [currentQuestion, setCurrentQuestion] = useState<number>(0);
   const { onOpen } = useModalStore();
   const { score } = useScoreStore();
-
-  console.log(currentQuestion);
-  console.log(data.length);
 
   const handleNextQuestion = () => {
     if (currentQuestion + 1 === data.length) {

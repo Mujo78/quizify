@@ -3,19 +3,30 @@
 import React, { useState } from "react";
 import Button from "../UI/Button";
 import LoadingDots from "../UI/LoadingDots";
+import useScoreStore from "@/hooks/useScoreStore";
 
 interface Props {
   answersData: string[];
   correctAnswer: string;
+  selected: string;
+  setSelected: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const AnswerPick: React.FC<Props> = ({ answersData, correctAnswer }) => {
-  const [selected, setSelected] = useState<string>("");
+const AnswerPick: React.FC<Props> = ({
+  answersData,
+  correctAnswer,
+  selected,
+  setSelected,
+}) => {
   const [correct, setCorrect] = useState<boolean>();
+  const { incrementScore } = useScoreStore();
 
   const handleCheckAnswer = (answer: string) => {
     setSelected(answer);
     setCorrect(correctAnswer === answer);
+    if (correctAnswer === answer) {
+      incrementScore();
+    }
   };
 
   return (
@@ -29,9 +40,14 @@ const AnswerPick: React.FC<Props> = ({ answersData, correctAnswer }) => {
               selected === value ? (correct ? "success" : "error") : "ghost"
             }
             className={`border border-gray-200 ${
-              selected === value ? "text-white" : "text-slate-600"
+              selected === value ? "text-white" : "!text-slate-600"
             }`}
-            onClick={() => handleCheckAnswer(value)}
+            disabled={selected !== "" && selected !== value}
+            onClick={() => {
+              if (selected === "") {
+                handleCheckAnswer(value);
+              }
+            }}
           >
             {value}
           </Button>

@@ -19,10 +19,11 @@ const Question: React.FC<Props> = ({
   lastQuestion,
 }) => {
   const [answers, setAnswers] = useState<string[]>([]);
+  const [selected, setSelected] = useState<string>("");
   const { onOpen } = useModalStore();
   const { score } = useScoreStore();
 
-  const { question, incorrectAnswers, correctAnswer } = questionData;
+  const { question, incorrectAnswers, correctAnswer, id } = questionData;
 
   const randomAnswers = useMemo(() => {
     const allAnswers = [...incorrectAnswers].sort(() => Math.random() - 0.5);
@@ -31,27 +32,38 @@ const Question: React.FC<Props> = ({
     );
     allAnswers.splice(correctAnswerIndex, 0, correctAnswer);
     return allAnswers;
-  }, [incorrectAnswers, correctAnswer]);
+  }, [correctAnswer]);
 
   useEffect(() => {
     setAnswers(randomAnswers);
-  }, []);
+  }, [id]);
 
   const handleShowExitModal = () => {
     onOpen("quit", { limit: 2, score });
   };
 
+  const handleOnNextQuestion = () => {
+    onNextQuestion();
+    setSelected("");
+  };
+
   return (
     <div className="flex flex-col gap-4">
       <h1 className="text-slate-800 text-2xl text-center">{question}</h1>
-      <AnswerPick answersData={answers} correctAnswer={correctAnswer} />
+      <AnswerPick
+        answersData={answers}
+        correctAnswer={correctAnswer}
+        selected={selected}
+        setSelected={setSelected}
+      />
       <div className="flex justify-between">
         <Button onClick={handleShowExitModal} color="secondary">
           Exit
         </Button>
         <Button
           color="info"
-          onClick={onNextQuestion}
+          onClick={handleOnNextQuestion}
+          disabled={selected === ""}
           className="!text-slate-900"
         >
           {lastQuestion ? "Finish" : "Next"}
