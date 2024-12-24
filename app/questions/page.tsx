@@ -1,8 +1,11 @@
-import Question from "@/components/Question/Question";
 import QuestionMain from "@/components/Question/QuestionMain";
-import QuestionScoreLimit from "@/components/Question/QuestionScoreLimit";
-import Divider from "@/components/UI/Divider";
 import { CategoryType, DifficultyType, QuestionType } from "@/lib/definitions";
+import {
+  validateCategory,
+  validateDifficulty,
+  validateLimit,
+} from "@/utils/helpers";
+import { redirect } from "next/navigation";
 import React from "react";
 import toast from "react-hot-toast";
 
@@ -39,6 +42,14 @@ async function getQuestionsData(
 const Questions = async ({
   searchParams: { category, difficulty, limit },
 }: PropsType) => {
+  if (
+    !validateDifficulty(difficulty) ||
+    !validateCategory(category) ||
+    !validateLimit(parseInt(limit))
+  ) {
+    return redirect("/");
+  }
+
   const data: QuestionType[] = await getQuestionsData(
     category,
     difficulty,

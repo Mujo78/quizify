@@ -19,7 +19,7 @@ const AnswerPick: React.FC<Props> = ({
   setSelected,
 }) => {
   const [correct, setCorrect] = useState<boolean>();
-  const { incrementScore } = useScoreStore();
+  const { incrementScore, counter } = useScoreStore();
 
   const handleCheckAnswer = (answer: string) => {
     setSelected(answer);
@@ -40,9 +40,12 @@ const AnswerPick: React.FC<Props> = ({
               selected === value ? (correct ? "success" : "error") : "ghost"
             }
             className={`border border-gray-200 ${
-              selected === value ? "text-white" : "!text-slate-600"
+              selected === value ? "!text-white" : "!text-slate-600"
             }`}
-            disabled={selected !== "" && selected !== value}
+            disabled={
+              (selected !== "" && selected !== value) ||
+              (counter === 0 && selected !== value)
+            }
             onClick={() => {
               if (selected === "") {
                 handleCheckAnswer(value);

@@ -1,4 +1,11 @@
-import { ColorsType, ComponentType, SizeType } from "@/lib/definitions";
+import {
+  CategoryType,
+  ColorsType,
+  ComponentType,
+  DifficultyType,
+  SizeType,
+} from "@/lib/definitions";
+import { categoryOptions, difficultyOptions } from "./data";
 
 export const colorVariants: Record<
   ComponentType,
@@ -105,3 +112,15 @@ export function formatCategory(category: string) {
 export function formatDifficulty(difficulty: string) {
   return difficulty.charAt(0).toUpperCase() + difficulty.slice(1);
 }
+
+export const validateDifficulty = (difficulty: string | DifficultyType) => {
+  return difficultyOptions.some((value) => value.value === difficulty);
+};
+
+export const validateCategory = (category: string | CategoryType) => {
+  return categoryOptions.some((value) => value === category);
+};
+
+export const validateLimit = (limit: number) => {
+  return limit >= 1 && limit <= 10;
+};

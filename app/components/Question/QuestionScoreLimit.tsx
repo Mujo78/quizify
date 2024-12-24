@@ -1,10 +1,11 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import Progress from "../UI/Progress";
 import { formatCategory, formatDifficulty } from "@/utils/helpers";
 import useScoreStore from "@/hooks/useScoreStore";
 import { CategoryType, DifficultyType } from "@/lib/definitions";
+import Countdown from "../UI/Countdown";
 
 interface Props {
   limitData: string;
@@ -19,9 +20,17 @@ const QuestionScoreLimit: React.FC<Props> = ({
   currentQuestion,
   difficulty,
 }) => {
-  const { score } = useScoreStore();
+  const { score, counter, setCounter } = useScoreStore();
 
   const progress = (currentQuestion / parseInt(limitData)) * 100;
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCounter();
+    }, 1000);
+
+    return () => clearInterval(intervalId);
+  }, []);
 
   return (
     <div className="flex justify-between">
@@ -35,6 +44,7 @@ const QuestionScoreLimit: React.FC<Props> = ({
         </p>
         <p>{formatDifficulty(difficulty)}</p>
       </div>
+      <Countdown counter={counter} />
       <Progress progressValue={progress} />
     </div>
   );

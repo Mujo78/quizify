@@ -21,7 +21,7 @@ const Question: React.FC<Props> = ({
   const [answers, setAnswers] = useState<string[]>([]);
   const [selected, setSelected] = useState<string>("");
   const { onOpen } = useModalStore();
-  const { score } = useScoreStore();
+  const { score, counter, resetCounter } = useScoreStore();
 
   const { question, incorrectAnswers, correctAnswer, id } = questionData;
 
@@ -45,6 +45,7 @@ const Question: React.FC<Props> = ({
   const handleOnNextQuestion = () => {
     onNextQuestion();
     setSelected("");
+    resetCounter();
   };
 
   return (
@@ -63,7 +64,7 @@ const Question: React.FC<Props> = ({
         <Button
           color="info"
           onClick={handleOnNextQuestion}
-          disabled={selected === ""}
+          disabled={selected === "" && counter !== 0}
           className="!text-slate-900"
         >
           {lastQuestion ? "Finish" : "Next"}

@@ -15,7 +15,7 @@ export const difficultyOptions: Option<DifficultyType>[] = [
   },
 ];
 
-export const categoryOptions: CategoryType[] = [
+export const categoryOptions: CategoryType[] | string[] = [
   "arts_and_literature",
   "film_and_tv",
   "food_and_drink",

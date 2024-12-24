@@ -9,7 +9,12 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import Label from "../UI/Label";
 import Input from "../UI/Input";
-import { formatCategory } from "@/utils/helpers";
+import {
+  formatCategory,
+  validateCategory,
+  validateDifficulty,
+  validateLimit,
+} from "@/utils/helpers";
 
 const QuestionConfig = () => {
   const router = useRouter();
@@ -17,7 +22,7 @@ const QuestionConfig = () => {
     "arts_and_literature"
   );
   const [selectDifficulty, setDifficulty] = useState<DifficultyType>("easy");
-  const [selectRange, setSelectRange] = useState<number>(1);
+  const [selectRange, setSelectRange] = useState<number>(10);
 
   const onHandleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const { value } = event.target;
@@ -39,17 +44,17 @@ const QuestionConfig = () => {
   const onHandleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (!categoryOptions.includes(selectValue)) {
+    if (!validateCategory(selectValue)) {
       toast.error("Please choose valid category option.");
       return;
     }
 
-    if (!difficultyOptions.some((value) => value.value === selectDifficulty)) {
+    if (!validateDifficulty(selectDifficulty)) {
       toast.error("Please choose valid level option.");
       return;
     }
 
-    if (selectRange < 1 || selectRange > 10) {
+    if (!validateLimit(selectRange)) {
       toast.error("Please choose valid range.");
       return;
     }
@@ -61,7 +66,7 @@ const QuestionConfig = () => {
 
   const formattedCategoryOptions = useMemo<Option<CategoryType>[]>(() => {
     return categoryOptions.map((value) => ({
-      value,
+      value: value as CategoryType,
       name: formatCategory(value),
     }));
   }, [categoryOptions]);
