@@ -6,6 +6,7 @@ import { formatCategory, formatDifficulty } from "@/utils/helpers";
 import useScoreStore from "@/hooks/useScoreStore";
 import { CategoryType, DifficultyType } from "@/lib/definitions";
 import Countdown from "../UI/Countdown";
+import useModalStore from "@/hooks/useModalStore";
 
 interface Props {
   limitData: string;
@@ -20,17 +21,20 @@ const QuestionScoreLimit: React.FC<Props> = ({
   currentQuestion,
   difficulty,
 }) => {
-  const { score, counter, setCounter } = useScoreStore();
+  const { score, counter, setCounter, isSelected } = useScoreStore();
+  const { isOpen } = useModalStore();
 
   const progress = (currentQuestion / parseInt(limitData)) * 100;
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setCounter();
+      if (!isSelected) {
+        setCounter();
+      }
     }, 1000);
 
     return () => clearInterval(intervalId);
-  }, []);
+  }, [isSelected]);
 
   return (
     <div className="flex justify-between">
@@ -44,7 +48,7 @@ const QuestionScoreLimit: React.FC<Props> = ({
         </p>
         <p>{formatDifficulty(difficulty)}</p>
       </div>
-      <Countdown counter={counter} />
+      {!isOpen && <Countdown counter={counter} />}
       <Progress progressValue={progress} />
     </div>
   );

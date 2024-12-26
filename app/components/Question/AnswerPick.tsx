@@ -19,10 +19,11 @@ const AnswerPick: React.FC<Props> = ({
   setSelected,
 }) => {
   const [correct, setCorrect] = useState<boolean>();
-  const { incrementScore, counter } = useScoreStore();
+  const { incrementScore, counter, setIsSelected } = useScoreStore();
 
   const handleCheckAnswer = (answer: string) => {
     setSelected(answer);
+    setIsSelected();
     setCorrect(correctAnswer === answer);
     if (correctAnswer === answer) {
       incrementScore();

@@ -1,29 +1,33 @@
 import React from "react";
+import Backdrop from "./Backdrop";
+import ModalHeader from "./ModalHeader";
+import ModalBody from "./ModalBody";
+import ModalFooter from "./ModalFooter";
 
 interface ModalProps {
-  onClose: () => void;
+  onClose?: () => void;
+  onConfirm: () => void;
   title: string;
   children: React.ReactNode;
 }
 
-const Modal: React.FC<ModalProps> = ({ children, onClose, title }) => {
+const Modal: React.FC<ModalProps> = ({
+  children,
+  onConfirm,
+  onClose,
+  title,
+}) => {
   return (
-    <div
-      className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-999"
-      onClick={onClose}
-    >
+    <>
+      <Backdrop />
       <div id="my_modal_1" className="modal modal-open">
-        <div className="modal-box">
-          <h3 className="font-bold text-lg">{title}</h3>
-          <div>{children}</div>
-          <div className="modal-action">
-            <button className="btn" onClick={onClose}>
-              Close
-            </button>
-          </div>
+        <div className="modal-box max-w-102">
+          <ModalHeader title={title} />
+          <ModalBody>{children}</ModalBody>
+          <ModalFooter onClose={onClose} onConfirm={onConfirm} />
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
