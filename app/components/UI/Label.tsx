@@ -7,7 +7,7 @@ type LabelProps = {
 const Label = ({ htmlFor, text, className }: LabelProps) => {
   return (
     <label htmlFor={htmlFor} className={`label ${className}`}>
-      <span className="label-text">{text}</span>
+      <span className="label-text text-slate-600">{text}</span>
     </label>
   );
 };

@@ -23,7 +23,7 @@ const QuestionMain: React.FC<QuestionsProps> = ({
 }) => {
   const [currentQuestion, setCurrentQuestion] = useState<number>(0);
   const { onOpen } = useModalStore();
-  const { score, setIsSelected } = useScoreStore();
+  const { score } = useScoreStore();
 
   const handleNextQuestion = () => {
     if (currentQuestion + 1 === data.length) {
@@ -46,6 +46,7 @@ const QuestionMain: React.FC<QuestionsProps> = ({
         questionData={data[currentQuestion]}
         lastQuestion={currentQuestion + 1 === data.length}
         onNextQuestion={handleNextQuestion}
+        limitData={limit}
       />
     </div>
   );

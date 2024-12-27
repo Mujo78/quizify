@@ -7,6 +7,7 @@ const Progress = ({ progressValue }: { progressValue: string | number }) => {
       className="radial-progress text-slate-600"
       style={style}
       role="progressbar"
+      aria-label="progress-bar-num-question"
     >
       {parseInt(progressValue as string).toFixed(0)}%
     </div>

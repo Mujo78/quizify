@@ -124,3 +124,23 @@ export const validateCategory = (category: string | CategoryType) => {
 export const validateLimit = (limit: number) => {
   return limit >= 1 && limit <= 10;
 };
+
+export const generateQuizFinishMessage = (limit: number, score: number) => {
+  if (score === limit && limit < 10) {
+    return `Amazing work! You got all ${score} questions right. Try a higher question limit for a bigger challenge!`;
+  }
+
+  if (score === limit) {
+    return `Perfect score! You answered all ${score} questions correctly. Well done!`;
+  }
+
+  if (score >= limit * 0.8) {
+    return `Great job! You scored ${score} out of ${limit}. You're really close to perfection!`;
+  }
+
+  if (score >= limit * 0.5) {
+    return `Good effort! You scored ${score} out of ${limit}. Keep practicing and aim higher next time!`;
+  }
+
+  return `Keep trying! You scored ${score} out of ${limit}. Practice makes perfect!`;
+};

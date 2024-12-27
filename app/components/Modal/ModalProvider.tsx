@@ -3,10 +3,13 @@ import useModalStore from "@/hooks/useModalStore";
 import React from "react";
 import Modal from "./Modal";
 import { useRouter } from "next/navigation";
+import { generateQuizFinishMessage } from "@/utils/helpers";
+import useScoreStore from "@/hooks/useScoreStore";
 
 const ModalProvider = () => {
   const router = useRouter();
   const { data, isOpen, onClose, type } = useModalStore();
+  const { resetScore, resetCounter } = useScoreStore();
 
   if (!isOpen) return null;
 
@@ -15,6 +18,8 @@ const ModalProvider = () => {
   const onConfirm = () => {
     onClose();
     router.replace("/");
+    resetScore();
+    resetCounter();
   };
 
   if (type === "quit") {
@@ -45,10 +50,9 @@ const ModalProvider = () => {
           - You've finished the quiz with a score of{" "}
           <strong>{`${score}/${limit}`}</strong>
         </p>
-        <p>
-          - Fantastic effort! Would you like to try again and improve your
-          score?
-        </p>
+        {limit !== undefined && score !== undefined && (
+          <p>{generateQuizFinishMessage(limit, score)}</p>
+        )}
       </div>
     </Modal>
   );

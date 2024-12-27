@@ -22,7 +22,7 @@ const QuestionConfig = () => {
     "arts_and_literature"
   );
   const [selectDifficulty, setDifficulty] = useState<DifficultyType>("easy");
-  const [selectRange, setSelectRange] = useState<number>(10);
+  const [selectRange, setSelectRange] = useState<number>(1);
 
   const onHandleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const { value } = event.target;

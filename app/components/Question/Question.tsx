@@ -11,12 +11,14 @@ interface Props {
   questionData: QuestionType;
   onNextQuestion: () => void;
   lastQuestion: boolean;
+  limitData: string;
 }
 
 const Question: React.FC<Props> = ({
   questionData,
   onNextQuestion,
   lastQuestion,
+  limitData: limit,
 }) => {
   const [answers, setAnswers] = useState<string[]>([]);
   const [selected, setSelected] = useState<string>("");
@@ -39,7 +41,7 @@ const Question: React.FC<Props> = ({
   }, [id]);
 
   const handleShowExitModal = () => {
-    onOpen("quit", { limit: 2, score });
+    onOpen("quit", { limit: parseInt(limit), score });
   };
 
   const handleOnNextQuestion = () => {
