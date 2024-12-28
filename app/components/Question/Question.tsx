@@ -11,7 +11,7 @@ interface Props {
   questionData: QuestionType;
   onNextQuestion: () => void;
   lastQuestion: boolean;
-  limitData: string;
+  limitData: number;
 }
 
 const Question: React.FC<Props> = ({
@@ -41,7 +41,7 @@ const Question: React.FC<Props> = ({
   }, [id]);
 
   const handleShowExitModal = () => {
-    onOpen("quit", { limit: parseInt(limit), score });
+    onOpen("quit", { limit, score });
   };
 
   const handleOnNextQuestion = () => {

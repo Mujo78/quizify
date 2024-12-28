@@ -19,7 +19,7 @@ const AnswerPick: React.FC<Props> = ({
   setSelected,
 }) => {
   const [correct, setCorrect] = useState<boolean>();
-  const { incrementScore, counter, setIsSelected } = useScoreStore();
+  const { incrementScore, counter, score, setIsSelected } = useScoreStore();
 
   const handleCheckAnswer = (answer: string) => {
     setSelected(answer);
@@ -27,6 +27,7 @@ const AnswerPick: React.FC<Props> = ({
     setCorrect(correctAnswer === answer);
     if (correctAnswer === answer) {
       incrementScore();
+      localStorage.setItem("score", `${score + 1}`);
     }
   };
 

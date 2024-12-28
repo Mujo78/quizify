@@ -9,7 +9,7 @@ import useScoreStore from "@/hooks/useScoreStore";
 const ModalProvider = () => {
   const router = useRouter();
   const { data, isOpen, onClose, type } = useModalStore();
-  const { resetScore, resetCounter } = useScoreStore();
+  const { resetCounter } = useScoreStore();
 
   if (!isOpen) return null;
 
@@ -18,8 +18,10 @@ const ModalProvider = () => {
   const onConfirm = () => {
     onClose();
     router.replace("/");
-    resetScore();
     resetCounter();
+    localStorage.removeItem("limit");
+    localStorage.removeItem("score");
+    localStorage.removeItem("num");
   };
 
   if (type === "quit") {

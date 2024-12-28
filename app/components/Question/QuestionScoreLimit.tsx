@@ -9,7 +9,7 @@ import Countdown from "../UI/Countdown";
 import useModalStore from "@/hooks/useModalStore";
 
 interface Props {
-  limitData: string;
+  limitData: number;
   categoryData: CategoryType;
   difficulty: DifficultyType;
   currentQuestion: number;
@@ -24,16 +24,15 @@ const QuestionScoreLimit: React.FC<Props> = ({
   const { score, counter, setCounter, isSelected } = useScoreStore();
   const { isOpen } = useModalStore();
 
-  const progress = (currentQuestion / parseInt(limitData)) * 100;
+  const progress = (currentQuestion / limitData) * 100;
 
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      if (!isSelected) {
+    if (!isSelected) {
+      const intervalId = setInterval(() => {
         setCounter();
-      }
-    }, 1000);
-
-    return () => clearInterval(intervalId);
+      }, 1000);
+      return () => clearInterval(intervalId);
+    }
   }, [isSelected]);
 
   return (
