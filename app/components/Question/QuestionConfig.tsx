@@ -60,6 +60,7 @@ const QuestionConfig = () => {
     }
 
     localStorage.setItem("limit", selectRange.toString());
+    localStorage.setItem("selected", "none");
     router.push(
       `/questions?limit=${selectRange}&difficulty=${selectDifficulty}&category=${selectValue}`
     );

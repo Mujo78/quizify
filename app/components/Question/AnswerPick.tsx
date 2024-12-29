@@ -23,6 +23,7 @@ const AnswerPick: React.FC<Props> = ({
 
   const handleCheckAnswer = (answer: string) => {
     setSelected(answer);
+    localStorage.setItem("selected", answer);
     setIsSelected();
     setCorrect(correctAnswer === answer);
     if (correctAnswer === answer) {

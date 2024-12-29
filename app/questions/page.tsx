@@ -23,7 +23,7 @@ async function getQuestionsData(
   limit: string
 ) {
   const res = await fetch(
-    `${process.env.HTTP_URL}?categories=${category}&limit=${limit}&difficulty=${difficulty}`,
+    `${process.env.HTTP_URL}s?categories=${category}&limit=${limit}&difficulty=${difficulty}`,
     {
       method: "GET",
       headers: {
@@ -33,7 +33,7 @@ async function getQuestionsData(
   );
 
   if (!res.ok) {
-    toast.error("Failed to fetch questions. PLease try again later.");
+    throw new Error("Something went wrong. Please try again later.");
   }
 
   return res.json();

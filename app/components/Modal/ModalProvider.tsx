@@ -22,6 +22,7 @@ const ModalProvider = () => {
     localStorage.removeItem("limit");
     localStorage.removeItem("score");
     localStorage.removeItem("num");
+    localStorage.removeItem("selected");
   };
 
   if (type === "quit") {

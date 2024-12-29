@@ -23,7 +23,7 @@ const Question: React.FC<Props> = ({
   const [answers, setAnswers] = useState<string[]>([]);
   const [selected, setSelected] = useState<string>("");
   const { onOpen } = useModalStore();
-  const { score, counter, resetCounter } = useScoreStore();
+  const { score, counter, resetCounter, setIsSelected } = useScoreStore();
 
   const { question, incorrectAnswers, correctAnswer, id } = questionData;
 
@@ -39,6 +39,19 @@ const Question: React.FC<Props> = ({
   useEffect(() => {
     setAnswers(randomAnswers);
   }, [id]);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const storageSelected = localStorage.getItem("selected");
+      if (counter === 0 && storageSelected === "none") {
+        setSelected("");
+      }
+      if (storageSelected !== "none" && storageSelected && counter !== 0) {
+        setSelected(storageSelected);
+        setIsSelected();
+      }
+    }
+  }, []);
 
   const handleShowExitModal = () => {
     onOpen("quit", { limit, score });
