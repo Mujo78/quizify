@@ -23,7 +23,7 @@ async function getQuestionsData(
   limit: string
 ) {
   const res = await fetch(
-    `${process.env.HTTP_URL}s?categories=${category}&limit=${limit}&difficulty=${difficulty}`,
+    `${process.env.HTTP_URL}?categories=${category}&limit=${limit}&difficulty=${difficulty}`,
     {
       method: "GET",
       headers: {
