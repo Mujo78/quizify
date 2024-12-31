@@ -25,7 +25,7 @@ Quizify is an interactive app designed to challenge and enhance your knowledge t
 - **Responsive Design**: Optimized for both mobile and desktop devices
 
 ## API
-This project uses [The Trivia API](#https://the-trivia-api.com/) to fetch quiz questions for each category.
+This project uses [The Trivia API](https://the-trivia-api.com/) to fetch quiz questions for each category.
 
 ## Technologies
 + Next.js
