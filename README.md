@@ -10,10 +10,22 @@ Quizify is an interactive app designed to challenge and enhance your knowledge t
 
 ## Table of Contents
 - [Quizify](#quizify)
+- [Demo](#demo)
 - [Features](#features)
 - [API](#api)
 - [Technologies](#technologies)
 - [Getting Started](#getting-started)
+
+## Features
+- **Diverse Categories**: Choose from topics like Music, Science, History and more
+- **Customizable Question Limit**: Users can select the number of questions per quiz
+- **Progressive Scoring** :Clear statistics track your progress and display your score
+- **Motivational Feedback**: Personalized messages at the end of each quiz
+- **Timed Mode**: Time limit for each question
+- **Responsive Design**: Optimized for both mobile and desktop devices
+
+## API
+This project uses [The Trivia API](#https://the-trivia-api.com/) to fetch quiz questions for each category.
 
 ## Technologies
 + Next.js
