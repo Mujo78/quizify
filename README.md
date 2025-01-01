@@ -16,6 +16,9 @@ Quizify is an interactive app designed to challenge and enhance your knowledge t
 - [Technologies](#technologies)
 - [Getting Started](#getting-started)
 
+## Demo
+[Quizify](https://quizify-one-cyan.vercel.app/)
+
 ## Features
 - **Diverse Categories**: Choose from topics like Music, Science, History and more
 - **Customizable Question Limit**: Users can select the number of questions per quiz
@@ -33,3 +36,7 @@ This project uses [The Trivia API](https://the-trivia-api.com/) to fetch quiz qu
 + TailwindCSS
 + DaisyUI
 + Zustand
+
+## Getting Started
+
+
