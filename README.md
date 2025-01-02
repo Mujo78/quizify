@@ -39,4 +39,33 @@ This project uses [The Trivia API](https://the-trivia-api.com/) to fetch quiz qu
 
 ## Getting Started
 
+### Prerequisites
 
+Before runing the application and start using, make sure you have following installed:
+- Node.js
+- pnpm
+
+### Installation
+1. Clone the repository
+```
+git clone https://github.com/Mujo78/quizify.git
+```
+
+2. Go to the project directory and install dependencies for the application
+```
+pnpm install
+```
+3. Create a `.env.local` file in the project directory and add the environment variables as shown in the `.env.example` file
+
+### Usage
+1. Start the development server
+```
+pnpm run dev
+```
+2. Open [http://localhost:3000/](http://localhost:3000/) with your browser to see the application in action
+
+### Building for Production
+To create a production build run:
+```
+pnpm run build
+```
